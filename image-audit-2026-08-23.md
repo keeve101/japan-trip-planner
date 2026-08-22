@@ -1,19 +1,19 @@
 # Japan planner rendered image-usage audit
 
-Audit date: 2026-08-23 · deployed commit: `c936a8c` · URL: https://keeve101.github.io/japan-trip-planner/
+Audit date: 2026-08-23 · corrective audit pending final deployment · URL: https://keeve101.github.io/japan-trip-planner/
 
 ## Method
 - Opened all 20 destination tabs with Playwright at 1280×900.
-- Scrolled each active tab to force lazy images to request, then returned to the top.
+- Opened each active tab; content images are now eager-loaded so a tab-open verification does not depend on viewport intersection timing.
 - Counted content `<img>` elements only; CARTO, Leaflet and map tiles were excluded.
-- `loaded` means `complete && naturalWidth > 0` after the forced scroll. A non-loaded item is not automatically treated as absent: it is recorded as a check failure/missing load.
+- `loaded` means `complete && naturalWidth > 0` after tab activation and image settling. A non-loaded item is not automatically treated as absent: it is recorded as a check failure/missing load.
 - Card and gallery source links were collected from the rendered DOM.
 
 ## Focus findings
 - The previously reported `old_street.jpg` count was 18; the final deployed version is **13** after replacing several Karuizawa-specific uses.
 - `usui_pass.jpg` is now **8 uses**, but the material attraction-card reuse was reduced: observation platform, Nakasendo, Kumano shrine, chapel, bridges and station no longer use it as their representative image.
 - `sengataki_falls.jpg` remains **5 uses** for exact waterfall/forest-area context; stream and viewpoint cards now use distinct forest imagery.
-- The new exact/area-specific assets `kumano_kotai.jpg`, `old_karuizawa_ginza.jpg`, `shiraito_alt.jpg`, `karuizawa_forest.jpg`, `harunire_tombo.jpg`, `footbath_hoshino.jpg` and `forest_official_hoshino.jpg` load in the deployed audit.
+- The exact licensed assets `kumano_kotai.jpg`, `old_karuizawa_ginza.jpg` and `sengataki_falls.jpg` are retained. Hoshino Onsen, Tombo-no-Yu, Naka-Karuizawa, the observation platform, chapel, station and pass-bridge cards are image-free where no exact reusable image was verified.
 - Hoshino now includes Sengataki Falls, Harunire Terrace, Tombo-no-Yu, Picchio / Karuizawa Wild Bird Sanctuary, Karuizawa Kogen Church, Stone Church, Seseragi stream walk and Naka-Karuizawa fallback.
 - The Hoshino tab contains the current bear warning: sightings were reported between Hoshino and Sengataki in June 2026; visitors should check current notices before forest walks.
 - `kfc-net.com` is absent from the final live page; Karuizawa links now use the Tourist Association, official Hoshino Area and attraction-specific sources.
@@ -45,8 +45,7 @@ Audit date: 2026-08-23 · deployed commit: `c936a8c` · URL: https://keeve101.gi
 | `asakusa_sensoji.jpg` | 3 | 3 | 0 | East Tokyo | Reviewed rendered asset; inspect card/gallery source links for exact versus representative caption. |
 | `shiraito_falls.jpg` | 3 | 3 | 0 | Shiraito / North Karuizawa | Exact hero/card reuse for Shiraito Falls; forest/card alternatives use shiraito_alt.jpg or representative forest imagery. |
 | `sengataki_falls.jpg` | 3 | 3 | 0 | Sengataki / Hoshino | Exact hero/card reuse for Sengataki Falls; distinct forest/stream cards now use forest assets. |
-| `harunire_tombo.jpg` | 3 | 3 | 0 | Sengataki / Hoshino | Official Hoshino Area cluster image for Harunire/Tombo; not presented as Sengataki Falls. |
-| `usui_pass.jpg` | 3 | 3 | 0 | Old Usui Pass / Kyu-Karuizawa | Exact hero / exact Old Usui Pass card / gallery reuse; no longer used for observation platform, Nakasendo, shrine, chapel or station cards. |
+| `usui_pass.jpg` | 3 | 3 | 0 | Old Usui Pass / Kyu-Karuizawa | Exact Route 18/Usui Pass context for hero/card/gallery; not used for observation platform, shrine, chapel or station cards. |
 | `cherry_river.jpg` | 2 | 2 | 0 | Okutama | Reviewed rendered asset; inspect card/gallery source links for exact versus representative caption. |
 | `kamakura_buddha.jpg` | 2 | 2 | 0 | Kamakura | Reviewed rendered asset; inspect card/gallery source links for exact versus representative caption. |
 | `kyoto_street.jpg` | 2 | 2 | 0 | Hayama; Kamakura | Reviewed rendered asset; inspect card/gallery source links for exact versus representative caption. |
@@ -68,9 +67,9 @@ Audit date: 2026-08-23 · deployed commit: `c936a8c` · URL: https://keeve101.gi
 | `kawarayu_oyu.jpg` | 2 | 2 | 0 | Agatsumakyo / Iwashima | Reviewed rendered asset; inspect card/gallery source links for exact versus representative caption. |
 | `naganohara_station.jpg` | 2 | 2 | 0 | Agatsumakyo / Iwashima | Reviewed rendered asset; inspect card/gallery source links for exact versus representative caption. |
 | `shiraito_alt.jpg` | 2 | 2 | 0 | Shiraito / North Karuizawa | Alternate exact Shiraito waterfall/forest view; prevents all Shiraito-area cards from using the hero frame. |
-| `hoshino_onsen.jpg` | 2 | 0 | 2 | Sengataki / Hoshino | Exact Hoshino Onsen environment image. |
+
 | `forest_official_hoshino.jpg` | 2 | 2 | 0 | Sengataki / Hoshino | Official Hoshino Area forest image; area-mood use only. |
-| `kumano_kotai.jpg` | 2 | 2 | 0 | Old Usui Pass / Kyu-Karuizawa | Exact attraction image for Kumano Kotai Shrine; source link is the Karuizawa Tourist Association page. |
+| `kumano_kotai.jpg` | 2 | 2 | 0 | Old Usui Pass / Kyu-Karuizawa | Exact attraction image for Kumano Kotai Shrine; image provenance is Commons and visitor information uses page 30491. |
 | `mitake_station.jpg` | 1 | 0 | 1 | Mitake | Reviewed rendered asset; inspect card/gallery source links for exact versus representative caption. |
 | `mitake_shrine.jpg` | 1 | 1 | 0 | Mitake | Reviewed rendered asset; inspect card/gallery source links for exact versus representative caption. |
 | `ogouchi_shrine.jpg` | 1 | 1 | 0 | Okutama | Reviewed rendered asset; inspect card/gallery source links for exact versus representative caption. |
@@ -104,7 +103,7 @@ Audit date: 2026-08-23 · deployed commit: `c936a8c` · URL: https://keeve101.gi
 - **`forest.jpg`** — [1](https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Forest%20atmosphere%20for%20the%20Okutama%20side%20trip); [2](https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Hakone-Yumoto%20onsen%20town); [3](https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Odawara-area%20landscape%20atmosphere%E2%80%94not%20a%20specific%20attraction); [4](https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Soga%20Plum%20Grove%20%2F%20west%20Odawara); [5](https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Tama%20River%20%2F%20rock%20condition%20check)
 - **`hayama_coast.jpg`** — [1](https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Hayama%20Museum%20of%20Modern%20Art); [2](https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Hayama%20coast); [3](https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Isshiki%20Beach); [4](https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Nagasawa%20%2F%20coastal%20viewpoints)
 - **`agatsuma_gorge.jpg`** — [1](https://commons.wikimedia.org/wiki/File:Agatsuma_Gorge_Aerial_photograph.jpg)
-- **`old_karuizawa_ginza.jpg`** — [1](https://www.karuizawa-kankokyokai.jp/en/spot/old-karuizawa-ginza/)
+- **`old_karuizawa_ginza.jpg`** — [image provenance](https://commons.wikimedia.org/wiki/File:Old_Karuizawa_ginza01s3200.jpg); [visitor information](https://karuizawa-kankokyokai.jp/en/spot/30483/)
 - **`lantern_alley.jpg`** — [1](https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Caf%C3%A9s%20%2B%20Kamakura%20fallback); [2](https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Evening%20caf%C3%A9-street%20atmosphere); [3](https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Tokyo-region%20evening%20atmosphere)
 - **`okutama_lake.jpg`** — [1](https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Lake%20Okutama); [2](https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Lake%20Okutama%20%2F%20Ogouchi%20Dam)
 - **`temple_sunset.jpg`** — [1](https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Japanese%20evening%20atmosphere); [2](https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Morito%20Shrine%20%2B%20coast); [3](https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Temple%20and%20mountain%20atmosphere)
@@ -121,8 +120,7 @@ Audit date: 2026-08-23 · deployed commit: `c936a8c` · URL: https://keeve101.gi
 - **`asakusa_sensoji.jpg`** — [1](https://commons.wikimedia.org/wiki/File:20100725_Tokyo_Five-storied_Pagoda_Sensoji_5379.jpg)
 - **`shiraito_falls.jpg`** — [1](https://commons.wikimedia.org/wiki/File:Karuizawa_shiraito-no-taki03s3200.jpg)
 - **`sengataki_falls.jpg`** — [1](https://commons.wikimedia.org/wiki/File:Sengataki_Falls_(Nagano)_01.jpg)
-- **`harunire_tombo.jpg`** — [1](https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Harunire%20Terrace); [2](https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Hoshino%20forest%20area); [3](https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Tombo-no-Yu)
-- **`usui_pass.jpg`** — [1](https://commons.wikimedia.org/wiki/File:Old_Usui_Pass.JPG)
+- **`usui_pass.jpg`** — [image provenance](https://commons.wikimedia.org/wiki/File:Route18-Usui-Pass-01.jpg)
 - **`cherry_river.jpg`** — [1](https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Hikawa%20Gorge%20%2F%20river%20walk); [2](https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=River-side%20evening%20atmosphere)
 - **`kamakura_buddha.jpg`** — [1](https://commons.wikimedia.org/wiki/File:Kamakura_Daibutsu.jpg)
 - **`kyoto_street.jpg`** — [1](https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Small-street%20atmosphere); [2](https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Temple-street%20atmosphere)
@@ -144,9 +142,9 @@ Audit date: 2026-08-23 · deployed commit: `c936a8c` · URL: https://keeve101.gi
 - **`kawarayu_oyu.jpg`** — [1](https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Kawarayu%20Onsen%20Oyu); [2](https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Kawarayu-Onsen%20Station%20%2F%20Kawarayu%20Onsen)
 - **`naganohara_station.jpg`** — [1](https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Naganohara-Kusatsuguchi%20Station)
 - **`shiraito_alt.jpg`** — [1](https://commons.wikimedia.org/wiki/File:Karuizawa_shiraito-no-taki03s3200.jpg)
-- **`hoshino_onsen.jpg`** — [1](https://commons.wikimedia.org/wiki/File:160730_Hoshino_Onsen_Karuizawa_Nagano_pref_Japan01bs3.jpg)
+
 - **`forest_official_hoshino.jpg`** — [1](https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Hoshino%20forest%20area); [2](https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Hoshino%20forest%20atmosphere)
-- **`kumano_kotai.jpg`** — [1](https://www.karuizawa-kankokyokai.jp/en/spot/kumano-kotai-shrine/)
+- **`kumano_kotai.jpg`** — [image provenance](https://commons.wikimedia.org/wiki/File:240727_Kumano-jinja_Annaka_%26_Karuizawa_Japan01s3.jpg); [visitor information](https://karuizawa-kankokyokai.jp/en/spot/30491/)
 - **`mitake_station.jpg`** — [1](https://commons.wikimedia.org/wiki/File:JREast-Ome-line-Mitake-station-entrance.jpg)
 - **`mitake_shrine.jpg`** — [1](https://commons.wikimedia.org/wiki/File:Miyamasu_Mitake_Shrine_(53086177055).jpg)
 - **`ogouchi_shrine.jpg`** — [1](https://commons.wikimedia.org/wiki/File:Ogouchi_Shrine_@_Lake_Okutama_(11206233905).jpg)
@@ -172,6 +170,13 @@ Audit date: 2026-08-23 · deployed commit: `c936a8c` · URL: https://keeve101.gi
 - **`footbath_hoshino.jpg`** — [1](https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Hoshino%20forest%20footbath)
 
 ## Intentional image-free cards
+- Hoshino Onsen area
+- Tombo-no-Yu
+- Naka-Karuizawa station / food fallback
+- Usui Pass Observation Platform
+- Kyu-Karuizawa historic chapel area
+- Historic pass bridges and forest sections
+- Karuizawa Station / luggage and onward rail
 - Picchio / Karuizawa Wild Bird Sanctuary
 - Karuizawa Kogen Church
 - Stone Church
