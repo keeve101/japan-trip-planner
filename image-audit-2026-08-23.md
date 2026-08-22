@@ -1,6 +1,6 @@
 # Japan planner rendered image-usage audit
 
-Audit date: 2026-08-23 · corrective audit pending final deployment · URL: https://keeve101.github.io/japan-trip-planner/
+Audit date: 2026-08-23 · deployed commit: `78089e4` · URL: https://keeve101.github.io/japan-trip-planner/
 
 ## Method
 - Opened all 20 destination tabs with Playwright at 1280×900.
@@ -185,3 +185,12 @@ Audit date: 2026-08-23 · corrective audit pending final deployment · URL: http
 - Megane Bridge / railway-history branch
 
 These cards explicitly say no reusable exact image was verified; they do not fall back to a misleading generic photograph.
+
+## Corrective live verification
+- Hoshino tab: 23 rendered content images, 0 missing after tab activation and settling.
+- Old Usui / Kyu-Karuizawa tab: 25 rendered content images, 0 missing after tab activation and settling.
+- `hoshino_onsen.jpg` is no longer referenced; the Hoshino Onsen card is image-free.
+- `kfc-net.com` occurrence count: 0.
+- Invalid human-readable Karuizawa Tourist Association slug count: 0.
+- Verified official attraction pages: [Old Karuizawa Ginza Street](https://karuizawa-kankokyokai.jp/en/spot/30483/) — HTTP 200; [Kumano Koutai Shrine](https://karuizawa-kankokyokai.jp/en/spot/30491/) — HTTP 200; [Old Usui Pass Gazebo](https://karuizawa-kankokyokai.jp/en/spot/30484/) — HTTP 200.
+- `scripts/audit_images.py` was inspected but not modified in this corrective pass; the rendered audit used the existing script with the deployed eager-loading behavior.
