@@ -1,0 +1,47 @@
+Date,Day,Phase,City / base,Who is present,Morning,Afternoon,Evening,Accommodation,Transport,Booking status,Notes
+2026-09-18,,Family overlap,Hakone,Family + optional trio,,,,,,Provisional,Confirmed family itinerary anchor
+2026-09-19,,Family overlap,Tokyo,Family + optional trio,,,,,,Provisional,Tokyo base begins
+2026-09-20,,Family overlap,Tokyo,Family + optional trio,,,,,,Provisional,Family itinerary
+2026-09-21,,Family overlap,Tokyo,Family + optional trio,,,,,,Provisional,Family itinerary
+2026-09-22,,Family overlap,Tokyo,Family + optional trio,,,,,,Provisional,Tokyo base ends
+2026-09-23,,Overlap / decision segment,,Keith + Le Xuan + Alex?,,,,,,Not booked,Choose whether to join family or begin trio route
+2026-09-24,,Overlap / decision segment,,Keith + Le Xuan + Alex?,,,,,,Not booked,Compare Mitake / Misaki / Kusatsu / coast
+2026-09-25,,Overlap / decision segment,,Keith + Le Xuan + Alex?,,,,,,Not booked,Keep weather and energy flexibility
+2026-09-26,,Trio,,Keith + Le Xuan + Alex?,,,,,,Not booked,Family itinerary remaining window
+2026-09-27,,Trio,,Keith + Le Xuan + Alex?,,,,,,Not booked,Protect airport transfer
+2026-09-28,,Departure,,Keith + Le Xuan,,,,,,Not booked,Confirm airport and flight time
+
+
+FAMILY ITINERARY,,,,,,,,,,,
+Earlier route,Seoul → Busan → Osaka → Hiroshima → Kyoto → Nagoya,,,,,,,,,,
+Confirmed anchor,Hakone on 18 September,,,,,,,,,,
+Confirmed anchor,Tokyo base on 19–22 September,,,,,,,,,,
+Open segment,23–25 September: destination decision,,,,,,,,,,
+Remaining window,26–28 September: departure details to confirm,,,,,,,,,,
+
+
+DESTINATION SHORTLIST,,,,,,,,,,,
+Destination,Shape,Why consider,Possible dates,Status,Decision notes,,,,,,
+Mitake,2 nights,Outdoor bouldering anchor,23–25 September,Maybe,,,,,,
+Misaki,Full day,Seafood + working harbour + Jogashima,23–25 September,Maybe,,,,,,
+Kusatsu Onsen,Overnight / 2 nights,Dedicated mountain onsen town,23–27 September,Maybe,,,,,,
+Enoshima / Kamakura,Full day,Iconic coast and culture,23–25 September,Maybe,,,,,,
+Hayama / Zushi,Full day,Quieter coastal recovery,23–25 September,Maybe,,,,,,
+Atami,Overnight,Onsen recovery with simpler rail access,23–25 September,Maybe,,,,,,
+
+
+BOOKINGS,,,,,,,,,,,
+Type,Item,Person(s),Date,Provider,Cost,Cancellation deadline,Status,Link,Notes,,
+Flight,SG → Japan,Keith + Le Xuan,,,,,Not booked,,Choose after leave and overlap window,,
+Flight,Japan → SG,Keith + Le Xuan,,,,,Not booked,,Compare airport options,,
+Accommodation,Family-overlap stay,Keith + Le Xuan,,,,,Not booked,,Check whether joining family accommodation is possible,,
+Accommodation,Trio base,Keith + Le Xuan + Alex?,,,,,Not booked,,Use cancellable booking first,,
+Activity,Mitake climbing,Keith + Le Xuan + Alex?,,,,,Not booked,,Live access/weather check required,,
+Activity,Kusatsu bath / onsen,Keith + Le Xuan + Alex?,,,,,Not booked,,Check current rules and hours,,
+
+
+DECISION LOG,,,,,,,,,,,
+Date,Decision,Options considered,Chosen option,Who agreed,Reason,Revisit date,,,,,,
+,Overlap window,,,,,,,,,,
+,Trio route,,,,,,,,,,
+,Flights / airports,,,,,,,,,,
